@@ -39,45 +39,100 @@ import kalpanaMadam from '../assets/kalpana_madam.png'
 import pulkitMadam from '../assets/pulkit_madam2.png'
 import mansimranMadam from '../assets/mansimran_madam.png'
 import nehaMadam from '../assets/nehamadam2.png'
+import rajatKumarImg from '../assets/RajatKumar.jpeg'
 
 const ssbMentors = [
   {
     name: 'Monika Sharma',
     subject: 'Director & Chief SSB Mentor',
-    qualification: 'M.A. (English), M.Ed. | CSCS-USA Coach',
-    exp: '10+ Years',
-    strengths: 'Officer Like Qualities (OLQs) cultivation, psychological resilience, and personality development.',
-    quote: 'Guiding aspirants with clarity. Building officers with confidence.',
+    qualification: 'M.A. (English), M.Ed. • CSCS Coach',
+    exp: '10+ Years Mentoring Defence Officers',
+    strengths: 'Officer Like Qualities (OLQs), psychological resilience & leadership development.',
+    quote: 'Guiding aspirants with clarity and building confident, dedicated defence officers.',
     image: madamImage,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
   },
   {
     name: 'Neha Madam',
     subject: 'SSB Recommended Officer Mentor',
-    qualification: 'B.Ed. & M.A. (Economics) • SSB Recommended',
-    exp: '7+ Years',
-    strengths: 'Screening (PPDT), TAT/WAT psychology analysis, and personal interview strategy.',
-    quote: 'Connecting real-world awareness with officer-like psychological clarity.',
+    qualification: 'B.Ed. & M.A. (Economics) • SSB Rec.',
+    exp: '7+ Years Guiding Defence Aspirants',
+    strengths: 'Screening (PPDT), TAT/WAT psychology analysis & personal interview strategy.',
+    quote: 'Connecting real-world awareness with officer-like psychological clarity and calm.',
     image: nehaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
   },
   {
     name: 'Pulkit Madam',
     subject: 'Communication & Lecturette Lead',
     qualification: 'B.Ed. & M.A. English (Linguistics)',
-    exp: '9+ Years',
-    strengths: 'Group Discussion, Lecturette confidence, fluent speech, and narrative articulation.',
-    quote: 'Building accuracy, command and officer-like authority in communication.',
+    exp: '9+ Years Guiding Defence Aspirants',
+    strengths: 'Group Discussion, Lecturette confidence, fluent speech & narrative articulation.',
+    quote: 'Building accuracy, command and officer-like authority in speech and communication.',
     image: pulkitMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
   },
   {
     name: 'Kalpana Madam',
     subject: 'Strategic Reasoning & OIR Specialist',
     qualification: 'B.E. Mechanical & M.E. Thermal',
-    exp: '15+ Years',
-    strengths: 'Verbal & Non-Verbal OIR tests mastery, spatial reasoning, and decision-making logic.',
-    quote: 'Making logical reasoning intuitive and lightning-fast under pressure.',
+    exp: '15+ Years Guiding Defence Aspirants',
+    strengths: 'Verbal & Non-Verbal OIR tests mastery, spatial reasoning & speed decision-making.',
+    quote: 'Making logical reasoning intuitive and lightning-fast under intense exam pressure.',
     image: kalpanaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
+  },
+  {
+    name: 'Lt Col KVS (Retd)',
+    role: 'Psychologist',
+    subject: 'SSB Psychologist (Psychology Wing)',
+    wing: 'Psychology Wing',
+    category: 'Defence Services',
+    qualification: '2 Years at SSB • Ex-Psychologist',
+    exp: 'Assessed 2,700+ SSB Candidates',
+    strengths: 'Psychological assessment, TAT/WAT/SRT analysis, self-awareness & candidate diagnosis.',
+    quote: 'Helping aspirants understand psychological assessment and develop genuine self-awareness.',
+    image: null,
+    initial: 'K',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
+  },
+  {
+    name: 'Col Rajat Kumar (Retd)',
+    role: 'Group Testing Officer',
+    subject: 'Group Testing Officer (GTO Wing)',
+    wing: 'GTO Ground Wing',
+    category: 'Defence Services',
+    qualification: '4 Years at SSB • Ex-GTO Trainer',
+    exp: 'Assessed 1,500+ SSB Candidates',
+    strengths: 'Teamwork dynamics, practical leadership, obstacle tactics & proactive participation.',
+    quote: 'Guiding aspirants in teamwork, practical leadership and confident participation in tasks.',
+    image: rajatKumarImg,
+    initial: 'R',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
+  },
+  {
+    name: 'Col RD Bhatia (Retd)',
+    role: 'Interviewing Officer',
+    subject: 'Interviewing Officer (Interview Wing)',
+    wing: 'Interview Wing',
+    category: 'Defence Services',
+    qualification: '6+ Years at SSB • Ex-Interviewing Officer',
+    exp: 'Assessed 3,500+ SSB Candidates',
+    strengths: 'PIQ deconstruction, structured communication, interview authenticity & answer clarity.',
+    quote: 'Helping aspirants communicate with clarity and approach interviews with true authenticity.',
+    image: null,
+    initial: 'R',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
   },
 ]
+
 
 const ssbPillars = [
   {
@@ -494,21 +549,47 @@ export default function SsbCourse() {
                 >
                   <div className="faculty-card-inner">
                     <div className="faculty-image-box">
-                      <img src={member.image} alt={member.name} />
+                      {member.image ? (
+                        <img src={member.image} alt={member.name} />
+                      ) : (
+                        <div className="faculty-initial-avatar">
+                          <span className="avatar-crest">🛡️</span>
+                          <span className="avatar-letter">{member.initial || member.name[0]}</span>
+                          <span className="avatar-badge">{member.wing || 'SSB Assessor'}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="faculty-info">
+                      {member.category && (
+                        <span className="faculty-category-pill">
+                          {member.category} • {member.wing || 'SSB Mentor'}
+                        </span>
+                      )}
                       <h3>{member.name}</h3>
                       <p className="faculty-subject">
                         Role: <strong>{member.subject}</strong>
                       </p>
-                      <p className="faculty-detail">Qualification: {member.qualification}</p>
+                      <p className="faculty-detail">Qualification / Tenure: {member.qualification}</p>
                       <p className="faculty-detail">Experience: {member.exp}</p>
                       <div className="faculty-separator"></div>
                       <div className="faculty-strengths">
-                        <strong>Key Strengths:</strong>
+                        <strong>Key Strengths / Experience:</strong>
                         <p>{member.strengths}</p>
                       </div>
                       <p className="faculty-quote">"{member.quote}"</p>
+                      {member.ctaLink && (
+                        <div className="faculty-cta-wrapper">
+                          <a
+                            href={member.ctaLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-hero-primary"
+                            style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}
+                          >
+                            {member.ctaText || 'Book 1-on-1 Guidance'} &rarr;
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>

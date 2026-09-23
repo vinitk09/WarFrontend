@@ -37,39 +37,47 @@ import nehaMadam from '../assets/nehamadam2.png'
 const faculty = [
   {
     name: 'Kalpana Madam',
-    subject: 'Mathematics Expert',
+    subject: 'Mathematics & Quantitative Aptitude',
     qualification: 'B.E. Mechanical & M.E. Thermal',
-    exp: '15+ Years',
-    strengths: 'Concept clarity and shortcut methods, NDA/CDS exams. Develop genuine love and speed for Mathematics.',
-    quote: 'Making Mathematics logical, simple and scoring for every serious aspirant.',
+    exp: '15+ Years Guiding Defence Aspirants',
+    strengths: 'Concept clarity, shortcut methods & speed problem-solving for NDA & CDS examinations.',
+    quote: 'Making Mathematics logical, simple and high-scoring for every serious defence aspirant.',
     image: kalpanaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Pulkit Madam',
-    subject: 'English & Communication',
-    qualification: 'B.Ed. and M.A. English (With Linguistics)',
-    exp: '9+ Years',
-    strengths: 'Grammar, vocabulary, comprehension and exam-oriented communication skills.',
-    quote: 'Building accuracy, confidence and command over English.',
+    subject: 'English Language & Communication',
+    qualification: 'B.Ed. & M.A. English (Linguistics)',
+    exp: '9+ Years Guiding Defence Aspirants',
+    strengths: 'Grammar precision, vocabulary retention, comprehension & exam-oriented fluency.',
+    quote: 'Building accuracy, confidence and commanding fluency over English for written and SSB.',
     image: pulkitMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Mansimran Madam',
-    subject: 'GAT - Science',
-    qualification: 'B.Ed. and M.Sc. (Chemistry)',
-    exp: '8+ Years',
-    strengths: 'Chemistry, Physics, Biology, engaging conceptual explanation and MCQ practice.',
-    quote: 'Making science fun, understandable and directly related to daily life examples.',
+    subject: 'GAT - Science (Physics, Chem & Bio)',
+    qualification: 'B.Ed. & M.Sc. (Chemistry)',
+    exp: '8+ Years Guiding Defence Aspirants',
+    strengths: 'Conceptual science explanations, practical applications & rapid MCQ elimination methods.',
+    quote: 'Making science intuitive, understandable and directly connected to daily life examples.',
     image: mansimranMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Neha Madam',
-    subject: 'GAT - Humanities & CA',
-    qualification: 'B.Ed. and M.A. (Economics)',
-    exp: '7+ Years',
-    strengths: 'History, Geography, Polity, Eco, Defence awareness & Current Affairs (CA). SSB - Recommended.',
-    quote: 'Help students connect facts, CA and make learning interesting.',
+    subject: 'GAT - Humanities & Current Affairs',
+    qualification: 'B.Ed. & M.A. (Economics) • SSB Rec.',
+    exp: '7+ Years Guiding Defence Aspirants',
+    strengths: 'History, Geography, Polity, Defence awareness & strategic Current Affairs connections.',
+    quote: 'Connecting factual knowledge with current events to make learning impactful and memorable.',
     image: nehaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
 ]
 
@@ -466,14 +474,27 @@ export default function NdaCourse() {
                       <p className="faculty-subject">
                         Subject Expert: <strong>{member.subject}</strong>
                       </p>
-                      <p className="faculty-detail">Qualification: {member.qualification}</p>
+                      <p className="faculty-detail">Qualification / Tenure: {member.qualification}</p>
                       <p className="faculty-detail">Experience: {member.exp}</p>
                       <div className="faculty-separator"></div>
                       <div className="faculty-strengths">
-                        <strong>Key Strengths:</strong>
+                        <strong>Key Strengths / Experience:</strong>
                         <p>{member.strengths}</p>
                       </div>
                       <p className="faculty-quote">"{member.quote}"</p>
+                      {member.ctaLink && (
+                        <div className="faculty-cta-wrapper">
+                          <a
+                            href={member.ctaLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-hero-primary"
+                            style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}
+                          >
+                            {member.ctaText || 'Enroll in Batch'} &rarr;
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>

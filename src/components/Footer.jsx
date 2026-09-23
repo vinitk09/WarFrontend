@@ -45,11 +45,11 @@ export default function Footer() {
           <div className="footer-v2-links">
             <h3>Explore Our Products</h3>
             <ul>
-              <li><Link to="/#system">Officer Prep System</Link></li>
-              <li><Link to="/#system">Integrated SSB Guidance</Link></li>
-              <li><Link to="/#system">Scientific Revision Plan</Link></li>
-              <li><Link to="/#system">Performance Analytics</Link></li>
-              <li><Link to="/services/defence-preparation">Mock Simulation Tests</Link></li>
+              <li><Link to="/services/defence-preparation">Officer Prep System</Link></li>
+              <li><Link to="/ssb-course">Integrated SSB Guidance</Link></li>
+              <li><Link to="/nda-course">Scientific Revision Plan</Link></li>
+              <li><Link to="/services/sports-performance">Performance Analytics</Link></li>
+              <li><Link to="/cds-course">Mock Simulation Tests</Link></li>
             </ul>
           </div>
 

@@ -8,6 +8,7 @@ import kalpanaMadam from '../assets/kalpana_madam.png'
 import pulkitMadam from '../assets/pulkit_madam2.png'
 import mansimranMadam from '../assets/mansimran_madam.png'
 import nehaMadam from '../assets/nehamadam2.png'
+import rajatKumarImg from '../assets/RajatKumar.jpeg'
 import { 
   Shield, 
   Target, 
@@ -26,41 +27,99 @@ import {
 const mentors = [
   {
     name: 'Kalpana Madam',
-    subject: 'Mathematics',
+    subject: 'Mathematics & Quantitative Aptitude',
+    category: 'Academic Faculty',
     qualification: 'B.E. Mechanical & M.E. Thermal',
-    exp: '15+ Years',
-    strengths: 'Concept clarity and shortcut methods, NDA/CDS exams. Develop genuine love for Mathematics.',
-    quote: 'Making Mathematics logical, simple and scoring for every serious aspirant.',
+    exp: '15+ Years Guiding Defence Aspirants',
+    strengths: 'Concept clarity, shortcut methods & speed problem-solving for NDA & CDS examinations.',
+    quote: 'Making Mathematics logical, simple and high-scoring for every serious defence aspirant.',
     image: kalpanaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Pulkit Madam',
-    subject: 'English',
-    qualification: 'B.Ed. and M.A. English (With Linguistics)',
-    exp: '9+ Years',
-    strengths: 'Grammar, vocabulary, comprehension and exam-oriented communication skills.',
-    quote: 'Building accuracy, confidence and command over English.',
+    subject: 'English Language & Communication',
+    category: 'Academic Faculty',
+    qualification: 'B.Ed. & M.A. English (Linguistics)',
+    exp: '9+ Years Guiding Defence Aspirants',
+    strengths: 'Grammar precision, vocabulary retention, comprehension & exam-oriented fluency.',
+    quote: 'Building accuracy, confidence and commanding fluency over English for written and SSB.',
     image: pulkitMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Mansimran Madam',
-    subject: 'GAT - Science',
-    qualification: 'B.Ed. and M.Sc. (Chemistry)',
-    exp: '8+ Years',
-    strengths: 'Chemistry, Physics, Biology, engaging conceptual explanation and MCQ practice.',
-    quote: 'Making science fun, understandable and directly related to daily life examples.',
+    subject: 'GAT - Science (Physics, Chem & Bio)',
+    category: 'Academic Faculty',
+    qualification: 'B.Ed. & M.Sc. (Chemistry)',
+    exp: '8+ Years Guiding Defence Aspirants',
+    strengths: 'Conceptual science explanations, practical applications & rapid MCQ elimination methods.',
+    quote: 'Making science intuitive, understandable and directly connected to daily life examples.',
     image: mansimranMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
   },
   {
     name: 'Neha Madam',
-    subject: 'GAT - Humanities & CA',
-    qualification: 'B.Ed. and M.A. (Economics)',
-    exp: '7+ Years',
-    strengths: 'History, Geography, Polity, Eco, Defence awareness & Current Affairs (CA). SSB - Recommended.',
-    quote: 'Help students connect facts, CA and make learning interesting.',
+    subject: 'GAT - Humanities & Current Affairs',
+    category: 'Academic Faculty',
+    qualification: 'B.Ed. & M.A. (Economics) • SSB Rec.',
+    exp: '7+ Years Guiding Defence Aspirants',
+    strengths: 'History, Geography, Polity, Defence awareness & strategic Current Affairs connections.',
+    quote: 'Connecting factual knowledge with current events to make learning impactful and memorable.',
     image: nehaMadam,
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Enroll in Batch',
+  },
+  {
+    name: 'Lt Col KVS (Retd)',
+    role: 'Psychologist',
+    subject: 'SSB Psychologist (Psychology Wing)',
+    wing: 'Psychology Wing',
+    category: 'Defence Services',
+    qualification: '2 Years at SSB • Ex-Psychologist',
+    exp: 'Assessed 2,700+ SSB Candidates',
+    strengths: 'Psychological assessment, TAT/WAT/SRT analysis, self-awareness & candidate diagnosis.',
+    quote: 'Helping aspirants understand psychological assessment and develop genuine self-awareness.',
+    image: null,
+    initial: 'K',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
+  },
+  {
+    name: 'Col Rajat Kumar (Retd)',
+    role: 'Group Testing Officer',
+    subject: 'Group Testing Officer (GTO Wing)',
+    wing: 'GTO Ground Wing',
+    category: 'Defence Services',
+    qualification: '4 Years at SSB • Ex-GTO Trainer',
+    exp: 'Assessed 1,500+ SSB Candidates',
+    strengths: 'Teamwork dynamics, practical leadership, obstacle tactics & proactive participation.',
+    quote: 'Guiding aspirants in teamwork, practical leadership and confident participation in tasks.',
+    image: rajatKumarImg,
+    initial: 'R',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
+  },
+  {
+    name: 'Col RD Bhatia (Retd)',
+    role: 'Interviewing Officer',
+    subject: 'Interviewing Officer (Interview Wing)',
+    wing: 'Interview Wing',
+    category: 'Defence Services',
+    qualification: '6+ Years at SSB • Ex-Interviewing Officer',
+    exp: 'Assessed 3,500+ SSB Candidates',
+    strengths: 'PIQ deconstruction, structured communication, interview authenticity & answer clarity.',
+    quote: 'Helping aspirants communicate with clarity and approach interviews with true authenticity.',
+    image: null,
+    initial: 'R',
+    ctaLink: 'https://forms.gle/XhFBUjSRyocVCNFn6',
+    ctaText: 'Book 1-on-1 Guidance',
   },
 ]
+
 
 const pillars = [
   {
@@ -370,21 +429,47 @@ export default function AboutUs() {
                 >
                   <div className="faculty-card-inner">
                     <div className="faculty-image-box">
-                      <img src={member.image} alt={member.name} />
+                      {member.image ? (
+                        <img src={member.image} alt={member.name} />
+                      ) : (
+                        <div className="faculty-initial-avatar">
+                          <span className="avatar-crest">🛡️</span>
+                          <span className="avatar-letter">{member.initial || member.name[0]}</span>
+                          <span className="avatar-badge">{member.wing || 'SSB Assessor'}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="faculty-info">
+                      {member.category && (
+                        <span className="faculty-category-pill">
+                          {member.category} • {member.wing || 'Subject Specialist'}
+                        </span>
+                      )}
                       <h3>{member.name}</h3>
                       <p className="faculty-subject">
-                        Subject Expert: <strong>{member.subject}</strong>
+                        {member.role ? 'Designation' : 'Subject Expert'}: <strong>{member.subject}</strong>
                       </p>
-                      <p className="faculty-detail">Qualification: {member.qualification}</p>
+                      <p className="faculty-detail">Qualification / Tenure: {member.qualification}</p>
                       <p className="faculty-detail">Experience: {member.exp}</p>
                       <div className="faculty-separator"></div>
                       <div className="faculty-strengths">
-                        <strong>Key Strengths:</strong>
+                        <strong>Key Strengths / Experience:</strong>
                         <p>{member.strengths}</p>
                       </div>
                       <p className="faculty-quote">"{member.quote}"</p>
+                      {member.ctaLink && (
+                        <div className="faculty-cta-wrapper">
+                          <a
+                            href={member.ctaLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-hero-primary"
+                            style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}
+                          >
+                            {member.ctaText || 'Book 1-on-1 Guidance'} &rarr;
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>

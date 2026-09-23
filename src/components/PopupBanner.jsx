@@ -24,18 +24,30 @@ const COURSE_PATHS = [
   '/courses/cscs',
 ]
 
+let hasShownHomeBanner = false
+let hasShownCourseBanner = false
+
 export default function PopupBanner() {
   const [isOpen, setIsOpen] = useState(false)
   const [currentBanner, setCurrentBanner] = useState(null)
   const location = useLocation()
 
   useEffect(() => {
+    // Clear any previous sessionStorage entries so refresh always shows the banner
+    try {
+      sessionStorage.removeItem('waarr_home_banner_shown')
+      sessionStorage.removeItem('waarr_course_banner_shown')
+    } catch {
+      // ignore
+    }
+  }, [])
+
+  useEffect(() => {
     const currentPath = location.pathname.toLowerCase()
 
-    // 1. Check if user is visiting home for the first time this session
+    // 1. Show home banner when entering or refreshing the home page
     if (currentPath === '/' || currentPath === '') {
-      const hasShownHome = sessionStorage.getItem('waarr_home_banner_shown')
-      if (!hasShownHome) {
+      if (!hasShownHomeBanner) {
         const timer = setTimeout(() => {
           setCurrentBanner({
             id: 'home-admission',
@@ -45,17 +57,16 @@ export default function PopupBanner() {
             badge: 'Limited Seats Available',
           })
           setIsOpen(true)
-          sessionStorage.setItem('waarr_home_banner_shown', 'true')
-        }, 600)
+          hasShownHomeBanner = true
+        }, 500)
         return () => clearTimeout(timer)
       }
     }
 
-    // 2. Check if user navigated to a Course page for the first time this session
+    // 2. Show course banner when navigating to or refreshing a course page
     const isCoursePage = COURSE_PATHS.some((path) => currentPath.startsWith(path))
     if (isCoursePage) {
-      const hasShownCourse = sessionStorage.getItem('waarr_course_banner_shown')
-      if (!hasShownCourse) {
+      if (!hasShownCourseBanner) {
         const isSsb = currentPath.includes('ssb')
         const timer = setTimeout(() => {
           setCurrentBanner({
@@ -70,8 +81,8 @@ export default function PopupBanner() {
             badge: isSsb ? 'Assessment Booking' : 'Upcoming Batch',
           })
           setIsOpen(true)
-          sessionStorage.setItem('waarr_course_banner_shown', 'true')
-        }, 500)
+          hasShownCourseBanner = true
+        }, 400)
         return () => clearTimeout(timer)
       }
     }
