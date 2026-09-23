@@ -28,7 +28,9 @@ import {
   UserCheck,
   Target,
   Brain,
-  MessageSquare
+  MessageSquare,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 
 // Mentor Assets
@@ -192,8 +194,8 @@ const faqs = [
     a: '“Ranneeti” is WAARR’s signature SSB preparation manual. It includes actual psychological test dossiers of recommended candidates, sample story frameworks for TAT/PP&DT, hundreds of solved SRTs, and crucial PIQ filling tips.',
   },
   {
-    q: 'What is the course fee for the 14-Day SSB Online Program?',
-    a: 'WAARR provides this flagship 14-Day guidance program at an economical fee of just ₹1,000 to ensure every deserving candidate can receive officer-grade mentorship without financial strain.',
+    q: 'How can I enroll in the 14-Day SSB Online Program?',
+    a: 'You can submit your admission inquiry directly using the enrollment form on this page or connect with our SSB mentorship team via WhatsApp / Phone at +91 7259346805.',
   },
   {
     q: 'How can I enroll in the upcoming SSB batch?',
@@ -220,6 +222,14 @@ export default function SsbCourse() {
     }, 2500)
     return () => clearInterval(timer)
   }, [])
+
+  const nextFaculty = () => {
+    setCurrentFaculty((prev) => (prev + 1) % ssbMentors.length)
+  }
+
+  const prevFaculty = () => {
+    setCurrentFaculty((prev) => (prev - 1 + ssbMentors.length) % ssbMentors.length)
+  }
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -255,11 +265,9 @@ export default function SsbCourse() {
 
           <div className="ssb-hero-cta-box" data-aos="fade-up" data-aos-delay="500">
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-hero-primary"
             >
               Enroll in 14-Day SSB Batch <ArrowRight size={18} />
@@ -295,8 +303,8 @@ export default function SsbCourse() {
             <div className="qstat-item">
               <GraduationCap size={20} />
               <div>
-                <strong>Special Fee</strong>
-                <span>Just ₹1000 Full Course</span>
+                <strong>Mentorship Focus</strong>
+                <span>Personalized 1-on-1 Guidance</span>
               </div>
             </div>
           </div>
@@ -435,9 +443,14 @@ export default function SsbCourse() {
           </div>
 
           <div className="steps-cta-wrap" data-aos="zoom-in">
-            <Link to="/#pricing" className="btn-hero-primary">
+            <a
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-hero-primary"
+            >
               Register for Next SSB Batch <ArrowRight size={18} />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -454,6 +467,24 @@ export default function SsbCourse() {
           </div>
 
           <div className="faculty-slider-wrapper">
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-prev-btn"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-next-btn"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={24} />
+            </button>
+
             <div className="faculty-slider">
               {ssbMentors.map((member, index) => (
                 <article
@@ -485,23 +516,41 @@ export default function SsbCourse() {
             </div>
           </div>
 
-          <div className="faculty-dots">
-            {ssbMentors.map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentFaculty ? 'active' : ''}`}
-                onClick={() => setCurrentFaculty(index)}
-              />
-            ))}
+          <div className="faculty-controls-row">
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="faculty-dots">
+              {ssbMentors.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentFaculty ? 'active' : ''}`}
+                  onClick={() => setCurrentFaculty(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
 
           <div className="faculty-cta-wrapper" style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="nav-btn"
               style={{ padding: '15px 40px', fontSize: '1.1rem' }}
             >
@@ -512,32 +561,28 @@ export default function SsbCourse() {
       </section>
 
       {/* FEE & REGISTRATION */}
+      {/* REGISTRATION & ADMISSION */}
       <section className="ssb-fee-section" data-aos="fade-up">
         <div className="ssb-container">
           <div className="fee-box">
             <div className="fee-left">
-              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>AFFORDABLE EXCELLENCE</div>
-              <h2>14-Day SSB Online Program Fee Structure</h2>
+              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>OFFICER SELECTION BOARD</div>
+              <h2>14-Day SSB Online Mentorship Cohort Admission</h2>
               <p className="fee-sub">
-                Relocating for offline coaching costs upwards of ₹25,000–₹40,000. WAARR gives you the complete 14-day rigorous mentorship, 1-on-1 mock interview, and psychological dossier review at just <strong>₹1000</strong>.
+                Comprehensive 5-day SSB interview roadmap, 1-on-1 personal mock interview, psychological dossier review, and GTO ground orientation.
               </p>
 
               <div className="webinar-deal">
-                <h4>🎯 Special Orientation Offer:</h4>
-                <p>Attend our free upcoming SSB orientation webinar and get an additional <strong>15% DISCOUNT</strong>.</p>
-                <p className="deal-contact">For webinar link and batch registration, WhatsApp us: <strong>+91 7259346805</strong></p>
+                <h4>🎯 SSB Admissions Desk:</h4>
+                <p>Ready to begin your SSB preparation or have questions regarding upcoming batch dates? Speak with our team.</p>
+                <p className="deal-contact">WhatsApp / Call: <strong>+91 7259346805</strong></p>
               </div>
             </div>
 
             <div className="fee-right">
               <div className="package-card" data-aos="zoom-in" data-aos-delay="200">
                 <div className="package-badge">14-DAY BATCH</div>
-                <div className="pkg-price">
-                  <span className="currency">₹</span>
-                  <span className="amount">1,000</span>
-                  <span className="duration">/ Complete Program</span>
-                </div>
-                <ul className="pkg-features">
+                <ul className="pkg-features" style={{ marginTop: '1.2rem' }}>
                   <li><CheckCircle2 size={18} /> Small Batch Size (12–15 Students only)</li>
                   <li><CheckCircle2 size={18} /> Complete 5-Day SSB Procedure Covered</li>
                   <li><CheckCircle2 size={18} /> 1-on-1 Personal Mock Interview & Debrief</li>
@@ -546,7 +591,12 @@ export default function SsbCourse() {
                   <li><CheckCircle2 size={18} /> Access to "Ranneeti" Master Dossier Guidebook</li>
                   <li><CheckCircle2 size={18} /> Spoken English & Lecturette Confidence Coaching</li>
                 </ul>
-                <a href="#enroll-form" className="btn-pkg-enroll">
+                <a
+                  href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-pkg-enroll"
+                >
                   Enroll in 14-Day SSB Batch <ArrowRight size={18} />
                 </a>
               </div>
@@ -557,7 +607,6 @@ export default function SsbCourse() {
             courseTitle="14-Day Rigorous SSB Guidance Program"
             courseCode="SSB"
             batchInfo="Upcoming 14-Day Batch"
-            price="₹1,000 / Complete Program"
           />
         </div>
       </section>
@@ -604,11 +653,9 @@ export default function SsbCourse() {
             </div>
             <div className="cta-banner-buttons">
               <a
-                href="#enroll-form"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-cta-white"
               >
                 Join SSB Batch Today <ArrowRight size={18} />

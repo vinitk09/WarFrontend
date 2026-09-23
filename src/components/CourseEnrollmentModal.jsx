@@ -7,7 +7,6 @@ export default function CourseEnrollmentModal({
   courseTitle = 'NDA Comprehensive Preparation Cohort',
   courseCode = 'NDA',
   batchInfo = 'NDA II 2026 Batch',
-  price = '₹1,000 / 3 Months',
 }) {
   // ESC key listener & body scroll lock
   useEffect(() => {
@@ -45,7 +44,6 @@ export default function CourseEnrollmentModal({
           courseTitle={courseTitle}
           courseCode={courseCode}
           batchInfo={batchInfo}
-          price={price}
           className="w-full my-0 bg-white rounded-2xl border-2 border-gray-900 shadow-2xl overflow-hidden text-left"
           onClose={onClose}
         />

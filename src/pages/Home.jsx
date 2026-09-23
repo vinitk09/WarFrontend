@@ -16,7 +16,7 @@ import mentorshipIcon from '../assets/Mentorship&Guidance .png'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
-import { ArrowRight, CheckCircle2, Activity, Award, Shield } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Activity, Award, Shield, ChevronLeft, ChevronRight } from 'lucide-react'
 
 // Register plugins once
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -53,7 +53,7 @@ const serviceVerticalCards = [
   },
   {
     id: 'defence-preparation',
-    title: 'Defence Preparation Programs',
+    title: 'SSB Board Mentors & Defence Preparation',
     number: '03',
     badge: 'Officer Selection',
     icon: Shield,
@@ -252,9 +252,17 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentFaculty((prev) => (prev + 1) % faculty.length)
-    }, 2000)
+    }, 4000)
     return () => clearInterval(timer)
   }, [])
+
+  const nextFaculty = () => {
+    setCurrentFaculty((prev) => (prev + 1) % faculty.length)
+  }
+
+  const prevFaculty = () => {
+    setCurrentFaculty((prev) => (prev - 1 + faculty.length) % faculty.length)
+  }
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -353,7 +361,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="hero-container" id="home">
         <img src={finalBg} alt="Hero Banner" className="hero-main-img" />
-        <a href="#pricing" className="hero-btn-overlay"></a>
+        <a href="#services" className="hero-btn-overlay"></a>
         <div className="hero-quote-left">
           <p className="quote-text">
             “GIVE ME A MAN OR A WOMAN WITH COMMON SENSE AND WHO IS NOT AN IDIOT AND I ASSURE YOU CAN MAKE A LEADER OUT OF HIM OR HER.”
@@ -505,7 +513,12 @@ export default function Home() {
         <div className="ready-cta-box">
           <p className="section-tag">READY FOR NDA 2026</p>
           <h2>Begin your preparation with clarity, discipline, and purpose.</h2>
-          <a href="#pricing" className="btn btn-primary">
+          <a
+            href="https://forms.gle/XhFBUjSRyocVCNFn6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
             Join the Batch
           </a>
         </div>
@@ -665,6 +678,24 @@ export default function Home() {
           </div>
 
           <div className="faculty-slider-wrapper">
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-prev-btn"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-next-btn"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={24} />
+            </button>
+
             <div className="faculty-slider">
               {faculty.map((member, index) => (
                 <article
@@ -696,63 +727,40 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="faculty-dots">
-            {faculty.map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentFaculty ? 'active' : ''}`}
-                onClick={() => setCurrentFaculty(index)}
-              />
-            ))}
+          <div className="faculty-controls-row">
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="faculty-dots">
+              {faculty.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentFaculty ? 'active' : ''}`}
+                  onClick={() => setCurrentFaculty(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
 
           <div className="faculty-cta-wrapper" style={{ textAlign: 'center', marginTop: '40px' }}>
-            <a href="#pricing" className="nav-btn" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>
-              Enroll Now
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* PRICING / INVESTMENT SECTION */}
-      <section className="investment-section section" id="pricing">
-        <div className="investment-container">
-          <div className="investment-header">
-            <h2>Course Investment & Registration</h2>
-            <p className="investment-sub">
-              Course Duration: 3 Months - June to September 2026 | Target Exam: 13 September 2026
-            </p>
-          </div>
-
-          <div className="investment-grid">
-            <div className="fee-card">
-              <p className="fee-hero-text">
-                Your defence dream deserves commitment, not expensive coaching. Prepare for NDA, CDS & with live classes for 3 months at just ₹1000.
-              </p>
-
-              <div className="special-offer">
-                <h4>Special Offer:</h4>
-                <p>
-                  Students who attend webinar on <strong>24 May 26 at 6pm</strong> will be eligible for an additional <strong>DISCOUNT of 15%</strong>
-                </p>
-                <p className="topic">
-                  <strong>Topic:</strong> NDA 2026 Preparations - To get the Link to join webinar kindly contact on Whatsapp
-                </p>
-              </div>
-            </div>
-
-            <div className="includes-content">
-              <h3>Everything Included</h3>
-              <ul className="includes-list">
-                <li>Complete NDA written preparation</li>
-                <li>Mathematics, English and GAT coverage</li>
-                <li>Integrated SSB guidance from Day 1</li>
-                <li>Individual mentorship & weekly progress tracking</li>
-                <li>Parent updates & mock tests with error analysis</li>
-                <li>Scientific revision system & 24×7 doubt support</li>
-                <li>Final War Room revision phase</li>
-              </ul>
-            </div>
+            <Link to="/nda-course" className="nav-btn" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>
+              Explore NDA Course
+            </Link>
           </div>
         </div>
       </section>

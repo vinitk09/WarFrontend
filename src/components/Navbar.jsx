@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, ChevronDown, Award, Shield, Compass, Dumbbell, Activity } from 'lucide-react'
 import logo from '../assets/waarrimg.png'
 
@@ -12,6 +12,58 @@ export default function Navbar() {
   const dropdownRef = useRef(null)
   const servicesDropdownRef = useRef(null)
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const isCoursesActive = [
+    '/nda-course',
+    '/cds-course',
+    '/ssb-course',
+    '/cscs-course',
+    '/cscs',
+    '/cscs-eaam',
+    '/cscs-eaam-course',
+    '/courses/cscs'
+  ].includes(location.pathname)
+
+  const isServicesActive = location.pathname.startsWith('/services/')
+
+  const scrollToFacultySection = () => {
+    const el = document.getElementById('faculty')
+    if (el) {
+      const navOffset = 90
+      const elementPos = el.getBoundingClientRect().top + window.pageYOffset
+      window.scrollTo({
+        top: Math.max(0, elementPos - navOffset),
+        behavior: 'smooth'
+      })
+      return true
+    }
+    return false
+  }
+
+  const handleFacultyClick = (e) => {
+    e.preventDefault()
+    setIsMenuOpen(false)
+    setIsDropdownOpen(false)
+    setIsMobileDropdownOpen(false)
+    setIsServicesDropdownOpen(false)
+    setIsMobileServicesDropdownOpen(false)
+
+    // Check if faculty section exists on current page
+    const currentFacultyEl = document.getElementById('faculty')
+    if (currentFacultyEl) {
+      scrollToFacultySection()
+      window.history.pushState(null, '', `${location.pathname}#faculty`)
+      return
+    }
+
+    // Otherwise navigate to home and scroll with staggered delays to ensure layout is ready
+    navigate('/#faculty')
+    const attempts = [100, 250, 450, 700, 1100]
+    attempts.forEach((delay) => {
+      setTimeout(scrollToFacultySection, delay)
+    })
+  }
 
   const handleLinkClick = (targetHash) => {
     setIsMenuOpen(false)
@@ -22,7 +74,12 @@ export default function Navbar() {
     if (location.pathname === '/' && targetHash) {
       const el = document.querySelector(targetHash)
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
+        const navOffset = 90
+        const elementPos = el.getBoundingClientRect().top + window.pageYOffset
+        window.scrollTo({
+          top: Math.max(0, elementPos - navOffset),
+          behavior: 'smooth'
+        })
       }
     }
   }
@@ -60,7 +117,7 @@ export default function Navbar() {
       <nav className={isMenuOpen ? 'active' : ''}>
         <Link
           to="/"
-          className={location.pathname === '/' && !location.hash ? 'nav-link active-nav-link' : 'nav-link'}
+          className={`nav-link ${location.pathname === '/' && (!location.hash || location.hash === '#home') ? 'active-nav-link' : ''}`}
           onClick={() => handleLinkClick('#home')}
         >
           Home
@@ -68,7 +125,7 @@ export default function Navbar() {
 
         <Link
           to="/about"
-          className={location.pathname === '/about' ? 'nav-link active-nav-link' : 'nav-link'}
+          className={`nav-link ${location.pathname === '/about' ? 'active-nav-link' : ''}`}
           onClick={() => {
             setIsMenuOpen(false)
             setIsDropdownOpen(false)
@@ -86,7 +143,7 @@ export default function Navbar() {
         >
           <button
             type="button"
-            className={`nav-dropdown-toggle ${isDropdownOpen || isMobileDropdownOpen ? 'dropdown-active' : ''}`}
+            className={`nav-dropdown-toggle ${isCoursesActive ? 'active-nav-link' : ''} ${isDropdownOpen || isMobileDropdownOpen ? 'dropdown-active' : ''}`}
             onClick={() => {
               setIsDropdownOpen(!isDropdownOpen)
               setIsMobileDropdownOpen(!isMobileDropdownOpen)
@@ -101,7 +158,7 @@ export default function Navbar() {
           <div className={`nav-dropdown-menu ${(isDropdownOpen || isMobileDropdownOpen) ? 'show' : ''}`}>
             <Link
               to="/nda-course"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/nda-course' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsDropdownOpen(false)
@@ -119,7 +176,7 @@ export default function Navbar() {
 
             <Link
               to="/cds-course"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/cds-course' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsDropdownOpen(false)
@@ -137,7 +194,7 @@ export default function Navbar() {
 
             <Link
               to="/ssb-course"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/ssb-course' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsDropdownOpen(false)
@@ -155,7 +212,7 @@ export default function Navbar() {
 
             <Link
               to="/cscs-course"
-              className="dropdown-item"
+              className={`dropdown-item ${['/cscs-course', '/cscs', '/cscs-eaam', '/cscs-eaam-course', '/courses/cscs'].includes(location.pathname) ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsDropdownOpen(false)
@@ -182,7 +239,7 @@ export default function Navbar() {
         >
           <button
             type="button"
-            className={`nav-dropdown-toggle ${isServicesDropdownOpen || isMobileServicesDropdownOpen ? 'dropdown-active' : ''}`}
+            className={`nav-dropdown-toggle ${isServicesActive ? 'active-nav-link' : ''} ${isServicesDropdownOpen || isMobileServicesDropdownOpen ? 'dropdown-active' : ''}`}
             onClick={() => {
               setIsServicesDropdownOpen(!isServicesDropdownOpen)
               setIsMobileServicesDropdownOpen(!isMobileServicesDropdownOpen)
@@ -197,7 +254,7 @@ export default function Navbar() {
           <div className={`nav-dropdown-menu services-menu ${(isServicesDropdownOpen || isMobileServicesDropdownOpen) ? 'show' : ''}`}>
             <Link
               to="/services/sports-performance"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/services/sports-performance' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsServicesDropdownOpen(false)
@@ -215,7 +272,7 @@ export default function Navbar() {
 
             <Link
               to="/services/professional-education"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/services/professional-education' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsServicesDropdownOpen(false)
@@ -233,7 +290,7 @@ export default function Navbar() {
 
             <Link
               to="/services/defence-preparation"
-              className="dropdown-item"
+              className={`dropdown-item ${location.pathname === '/services/defence-preparation' ? 'active-item' : ''}`}
               onClick={() => {
                 setIsMenuOpen(false)
                 setIsServicesDropdownOpen(false)
@@ -244,45 +301,40 @@ export default function Navbar() {
                 <Shield size={18} />
               </div>
               <div className="dropdown-item-text">
-                <strong>Defence Preparation</strong>
+                <strong>SSB Board Mentors & Defence Preparation</strong>
                 <span>NDA, CDS, SSB & In-Service (ACC/SCO/PCSL)</span>
               </div>
             </Link>
           </div>
         </div>
 
-        <Link
-          to="/#system"
-          className="nav-link"
-          onClick={() => handleLinkClick('#system')}
-        >
-          Program
-        </Link>
-
-        <Link
-          to="/#faculty"
-          className="nav-link"
-          onClick={() => handleLinkClick('#faculty')}
+        <a
+          href="/#faculty"
+          className={`nav-link ${(location.pathname === '/' && location.hash === '#faculty') || location.hash === '#faculty' ? 'active-nav-link' : ''}`}
+          onClick={handleFacultyClick}
         >
           Faculty
-        </Link>
+        </a>
 
-        <Link
+        <a
           className="nav-btn mobile-only"
-          to="/#pricing"
-          onClick={() => handleLinkClick('#pricing')}
+          href="https://forms.gle/XhFBUjSRyocVCNFn6"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => handleLinkClick()}
         >
           Enroll Now
-        </Link>
+        </a>
       </nav>
 
-      <Link
+      <a
         className="nav-btn desktop-only"
-        to="/#pricing"
-        onClick={() => handleLinkClick('#pricing')}
+        href="https://forms.gle/XhFBUjSRyocVCNFn6"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         Enroll Now
-      </Link>
+      </a>
     </header>
   )
 }

@@ -23,7 +23,9 @@ import {
   BarChart3,
   Calendar,
   Layers,
-  GraduationCap
+  GraduationCap,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 
 // Assets
@@ -119,28 +121,7 @@ const appFeatures = [
   },
 ]
 
-const steps = [
-  {
-    step: '01',
-    title: 'Visit Portal / App',
-    desc: 'Access the WAARR Digital Learning Portal or download the WAARR Student App.',
-  },
-  {
-    step: '02',
-    title: 'Register Profile',
-    desc: 'Click “New Student Registration” and input your academic and contact details.',
-  },
-  {
-    step: '03',
-    title: 'Select NDA 2026 Batch',
-    desc: 'Navigate to Courses & choose the NDA 2026 Comprehensive Online Batch.',
-  },
-  {
-    step: '04',
-    title: 'Secure Enrollment',
-    desc: 'Complete payment securely to unlock instant access to live classes, study materials, and tests.',
-  },
-]
+
 
 const keyHighlights = [
   'Well-researched study materials updated to latest UPSC NDA pattern',
@@ -176,8 +157,8 @@ const faqs = [
     a: 'Yes! Unlike other coaching institutes that only teach written syllabus, WAARR integrates SSB guidance (WAT, TAT, Lecturette, Group Discussion, and Officer-Like Qualities cultivation) right from Day 1 of the NDA batch.',
   },
   {
-    q: 'What is the fee for the WAARR NDA Online Course?',
-    a: 'WAARR is committed to making officer-grade coaching accessible to every deserving aspirant across India. Our complete 3-Month NDA batch is available at an economical fee of just ₹1000, with additional discounts for webinar attendees.',
+    q: 'What is the admission and enrollment process for the WAARR NDA Online Course?',
+    a: 'Students can enroll directly using the registration form on this page or connect with our academic counseling desk via WhatsApp / Phone at +91 7259346805.',
   },
   {
     q: 'How does WAARR handle student doubt clearing?',
@@ -208,6 +189,14 @@ export default function NdaCourse() {
     }, 2500)
     return () => clearInterval(timer)
   }, [])
+
+  const nextFaculty = () => {
+    setCurrentFaculty((prev) => (prev + 1) % faculty.length)
+  }
+
+  const prevFaculty = () => {
+    setCurrentFaculty((prev) => (prev - 1 + faculty.length) % faculty.length)
+  }
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -243,11 +232,9 @@ export default function NdaCourse() {
 
           <div className="nda-hero-cta-box" data-aos="fade-up" data-aos-delay="500">
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-hero-primary"
             >
               Enroll in NDA 2026 Batch <ArrowRight size={18} />
@@ -283,8 +270,8 @@ export default function NdaCourse() {
             <div className="qstat-item">
               <GraduationCap size={20} />
               <div>
-                <strong>Special Fee</strong>
-                <span>Just ₹1000 Full Course</span>
+                <strong>Admission Status</strong>
+                <span>New Batch Open</span>
               </div>
             </div>
           </div>
@@ -370,37 +357,7 @@ export default function NdaCourse() {
         </div>
       </section>
 
-      {/* HOW TO ENROLL STEPS */}
-      <section className="nda-steps-section">
-        <div className="nda-container">
-          <div className="sec-header-center" data-aos="fade-up">
-            <div className="sec-pill">SIMPLE ENROLLMENT</div>
-            <h2>How to Enroll in the Best NDA Online Course</h2>
-            <p>Get started with your officer journey in 4 easy steps.</p>
-          </div>
 
-          <div className="nda-steps-grid">
-            {steps.map((item, index) => (
-              <div
-                className="step-card"
-                key={index}
-                data-aos="fade-up"
-                data-aos-delay={index * 150}
-              >
-                <div className="step-num">{item.step}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="steps-cta-wrap" data-aos="zoom-in">
-            <Link to="/#pricing" className="btn-hero-primary">
-              Register Now & Begin Learning <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* KEY COURSE FEATURES LIST & BENEFITS */}
       <section className="nda-benefits-section">
@@ -475,6 +432,24 @@ export default function NdaCourse() {
           </div>
 
           <div className="faculty-slider-wrapper">
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-prev-btn"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-next-btn"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={24} />
+            </button>
+
             <div className="faculty-slider">
               {faculty.map((member, index) => (
                 <article
@@ -506,23 +481,41 @@ export default function NdaCourse() {
             </div>
           </div>
 
-          <div className="faculty-dots">
-            {faculty.map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentFaculty ? 'active' : ''}`}
-                onClick={() => setCurrentFaculty(index)}
-              />
-            ))}
+          <div className="faculty-controls-row">
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="faculty-dots">
+              {faculty.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentFaculty ? 'active' : ''}`}
+                  onClick={() => setCurrentFaculty(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
 
           <div className="faculty-cta-wrapper" style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="nav-btn"
               style={{ padding: '15px 40px', fontSize: '1.1rem' }}
             >
@@ -532,33 +525,28 @@ export default function NdaCourse() {
         </div>
       </section>
 
-      {/* PRICING / FEE SECTION */}
+      {/* ADMISSION & ENROLLMENT SECTION */}
       <section className="nda-fee-section" data-aos="fade-up">
         <div className="nda-container">
           <div className="fee-box">
             <div className="fee-left">
-              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>AFFORDABLE EXCELLENCE</div>
-              <h2>NDA 2026 Online Batch Fee Structure</h2>
+              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>EXCELLENCE IN DEFENCE</div>
+              <h2>NDA 2026 Online Batch Registration</h2>
               <p className="fee-sub">
-                Your defence dream deserves commitment, not expensive coaching. Prepare with live classes, study materials, and mock tests for 3 months at just <strong>₹1000</strong>.
+                Prepare with structured live classes, rigorous daily practice, comprehensive study materials, and integrated SSB orientation led by India's top defence educators.
               </p>
 
               <div className="webinar-deal">
-                <h4>🎯 Special Webinar Discount:</h4>
-                <p>Students who attend our orientation webinar will be eligible for an additional <strong>15% DISCOUNT</strong>.</p>
-                <p className="deal-contact">For webinar link and registration, contact us on WhatsApp: <strong>+91 7259346805</strong></p>
+                <h4>🎯 Academic Counseling Desk:</h4>
+                <p>Have questions regarding the batch syllabus, schedule, or study plan? Connect directly with our academic coordinators.</p>
+                <p className="deal-contact">WhatsApp / Call: <strong>+91 7259346805</strong></p>
               </div>
             </div>
 
             <div className="fee-right">
               <div className="package-card" data-aos="zoom-in" data-aos-delay="200">
-                <div className="package-badge">ALL-INCLUSIVE</div>
-                <div className="pkg-price">
-                  <span className="currency">₹</span>
-                  <span className="amount">1,000</span>
-                  <span className="duration">/ 3 Months</span>
-                </div>
-                <ul className="pkg-features">
+                <div className="package-badge">ALL-INCLUSIVE CURRICULUM</div>
+                <ul className="pkg-features" style={{ marginTop: '1.2rem' }}>
                   <li><CheckCircle2 size={18} /> Complete NDA written coverage (Math + GAT)</li>
                   <li><CheckCircle2 size={18} /> Integrated SSB interview guidance from Day 1</li>
                   <li><CheckCircle2 size={18} /> Daily live classes & recorded video access</li>
@@ -567,7 +555,12 @@ export default function NdaCourse() {
                   <li><CheckCircle2 size={18} /> 24/7 dedicated doubt resolution desk</li>
                   <li><CheckCircle2 size={18} /> Final War Room revision marathon</li>
                 </ul>
-                <a href="#enroll-form" className="btn-pkg-enroll">
+                <a
+                  href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-pkg-enroll"
+                >
                   Enroll in NDA Batch Now <ArrowRight size={18} />
                 </a>
               </div>
@@ -578,7 +571,6 @@ export default function NdaCourse() {
             courseTitle="NDA 2026 Comprehensive Online Batch"
             courseCode="NDA"
             batchInfo="NDA 2026 Batch"
-            price="₹1,000 / 3 Months"
           />
         </div>
       </section>
@@ -625,11 +617,9 @@ export default function NdaCourse() {
             </div>
             <div className="cta-banner-buttons">
               <a
-                href="#enroll-form"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-cta-white"
               >
                 Join Batch Today <ArrowRight size={18} />

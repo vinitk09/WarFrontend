@@ -78,44 +78,7 @@ const examSections = [
   }
 ]
 
-const modules = [
-  {
-    num: '01',
-    title: 'Exercise Physiology & Bioenergetic Pathways',
-    desc: 'Master the sliding filament theory, motor unit recruitment patterns, ATP replenishment pathways, lactate threshold dynamics, and hormonal responses to acute resistance exercise.',
-    tags: ['Muscle Physiology', 'Energy Systems', 'Hormonal Adaptations']
-  },
-  {
-    num: '02',
-    title: 'Anatomy, Kinesiology & Biomechanics of Resistance Exercise',
-    desc: 'Understand levers (1st, 2nd, and 3rd class), torque, biomechanical vectors, anatomical planes of motion, momentum, resistance curves, and kinematic movement efficiency.',
-    tags: ['Levers & Torque', 'Planes of Motion', 'Resistance Vectors']
-  },
-  {
-    num: '03',
-    title: 'Sports Nutrition, Energy Balance & Ergogenic Aids',
-    desc: 'Comprehensive study of pre-, intra-, and post-workout nutrition, protein synthesis requirements, glycogen replenishment, hydration metrics, and WADA/NSCA-approved dietary supplements.',
-    tags: ['Macronutrient Timing', 'Hydration Strategies', 'Ergogenic Aids']
-  },
-  {
-    num: '04',
-    title: 'Testing Protocols, Normative Benchmarks & Data Analytics',
-    desc: 'Proper scientific ordering of physical tests (non-fatiguing → agility → maximum power → sprint → endurance), validity/reliability principles, and data analysis for athletic profiling.',
-    tags: ['Testing Sequence', '1RM Testing', 'Normative Benchmarks']
-  },
-  {
-    num: '05',
-    title: 'Exercise Technique, Olympic Lifts & Video Analysis Lab',
-    desc: 'Intensive video fault-finding workshops covering Snatch, Clean & Jerk, Deadlift, Back Squat, Bench Press, Plyometrics, Speed (Acceleration vs Max Velocity), and COD mechanics.',
-    tags: ['Olympic Lifts', 'Video Fault Finding', 'Plyometrics & Speed']
-  },
-  {
-    num: '06',
-    title: 'Advanced Periodization & Annual Program Design (YTP)',
-    desc: 'Constructing Year-Round Training Programs (YTP): General Preparatory Phase (GPP), Specific Preparatory Phase (SPP), Pre-Competition, Competition Tapering, and Transition/Active Rest.',
-    tags: ['Macrocycles', 'Linear & Undulating', 'Tapering Strategies']
-  }
-]
+
 
 const sixPillars = [
   {
@@ -199,8 +162,8 @@ const faqs = [
     a: 'All live lectures are recorded in high-definition and uploaded to your student portal within hours. You have unlimited replay access 24/7 on both desktop and mobile devices.'
   },
   {
-    q: 'What is the course fee for WAARR’s CSCS / EAAM Preparation Program?',
-    a: 'WAARR believes in making world-class coaching accessible to serious coaches and sports professionals across India. Our complete 3-month comprehensive cohort is available at an affordable introductory fee of just ₹1,000, with an additional 15% discount for orientation webinar attendees.'
+    q: 'How can I enroll in WAARR’s CSCS / EAAM Preparation Program?',
+    a: 'You can submit your admission inquiry using the form on this page or connect with our academic mentorship desk via WhatsApp or call at +91 7259346805 for batch onboarding and syllabus schedules.'
   }
 ]
 
@@ -249,8 +212,8 @@ export default function CscsCourse() {
               <span className="text-xs text-gray-400 font-medium">Practice MCQs with Rationales</span>
             </div>
             <div className="bg-white/5 p-4 rounded-xl border border-white/10">
-              <span className="text-3xl font-black text-white block">₹1,000</span>
-              <span className="text-xs text-gray-400 font-medium">Complete 3-Month Fee</span>
+              <span className="text-3xl font-black text-white block">1-on-1</span>
+              <span className="text-xs text-gray-400 font-medium">Mentorship with Monika Sharma</span>
             </div>
           </div>
         </div>
@@ -385,42 +348,7 @@ export default function CscsCourse() {
         </div>
       </section>
 
-      {/* DETAILED SYLLABUS MODULES */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-black text-yellow-400 tracking-widest uppercase">COMPLETE SYLLABUS COVERAGE</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-4">
-              Chapter-by-Chapter Curriculum Architecture
-            </h2>
-            <p className="text-gray-400 text-base sm:text-lg">
-              Aligned with the 4th Edition of the Essentials of Strength Training and Conditioning textbook.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {modules.map((mod) => (
-              <div
-                key={mod.num}
-                className="p-7 rounded-2xl bg-gray-800/80 border border-gray-700 hover:border-white transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <span className="text-xs font-black text-yellow-400 tracking-widest block mb-2">MODULE {mod.num}</span>
-                  <h3 className="text-xl font-bold text-white mb-3">{mod.title}</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-6">{mod.desc}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-700">
-                  {mod.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="text-xs font-semibold px-2.5 py-1 rounded bg-gray-700 text-gray-200">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* WHO SHOULD ATTEND */}
       <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -454,17 +382,17 @@ export default function CscsCourse() {
         <div className="bg-black text-white rounded-3xl p-8 sm:p-12 shadow-2xl mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7">
-              <span className="text-xs font-bold text-yellow-400 uppercase tracking-widest block mb-2">AFFORDABLE EXCELLENCE</span>
+              <span className="text-xs font-bold text-yellow-400 uppercase tracking-widest block mb-2">SCIENTIFIC EXCELLENCE</span>
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-                3-Month CSCS / EAAM Cohort Investment
+                EAAM Cohort Registration
               </h2>
               <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
-                International coaching programs for CSCS typically cost upwards of ₹35,000 to ₹50,000. WAARR breaks all financial barriers by offering complete live instruction, study packs, and mock exams for 3 months at just <strong>₹1,000</strong>.
+                Master the gold standard in strength & conditioning. WAARR offers complete live instruction, applied exercise technique labs, chapter-by-chapter summaries, and timed mock exams.
               </p>
               <div className="bg-white/10 p-4 rounded-xl border border-white/20">
-                <h4 className="text-yellow-400 font-bold text-sm mb-1">🎯 Special Orientation Webinar Offer:</h4>
+                <h4 className="text-yellow-400 font-bold text-sm mb-1">🎯 Academic Counseling Desk:</h4>
                 <p className="text-xs sm:text-sm text-gray-200">
-                  Attend our upcoming online orientation webinar to receive an additional <strong>15% DISCOUNT</strong> and free sample chapter summaries.
+                  Have questions about exam eligibility, textbook study plans, or batch timings? Speak directly with our CSCS coaching coordinator.
                 </p>
                 <p className="text-xs text-gray-400 mt-2">
                   WhatsApp Support Desk: <strong>+91 7259346805</strong>
@@ -474,12 +402,7 @@ export default function CscsCourse() {
 
             <div className="lg:col-span-5 bg-white text-gray-900 p-8 rounded-2xl shadow-lg text-center flex flex-col justify-between">
               <div>
-                <span className="text-xs font-black uppercase tracking-widest text-gray-500 block mb-1">ALL-INCLUSIVE ADMISSION</span>
-                <div className="flex items-baseline justify-center gap-1 my-3">
-                  <span className="text-2xl font-bold">₹</span>
-                  <span className="text-5xl font-black">1,000</span>
-                  <span className="text-gray-500 font-semibold text-sm">/ 3 Months</span>
-                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-gray-500 block mb-3">ALL-INCLUSIVE CURRICULUM</span>
                 <ul className="text-left space-y-2.5 my-6 text-xs sm:text-sm font-semibold text-gray-700">
                   <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-green-600" /> Complete NSCA Scientific Foundations</li>
                   <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-green-600" /> Complete Practical/Applied Video Lab</li>
@@ -490,7 +413,9 @@ export default function CscsCourse() {
                 </ul>
               </div>
               <a
-                href="#enroll-form"
+                href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full py-3.5 px-6 rounded-xl bg-black text-white font-bold text-sm hover:bg-gray-800 transition-colors shadow-md block text-center"
               >
                 Enroll in CSCS Batch Now
@@ -504,7 +429,6 @@ export default function CscsCourse() {
           courseTitle="NSCA CSCS & EAAM Exam Preparation Cohort"
           courseCode="CSCS"
           batchInfo="2026 Batch"
-          price="₹1,000 / 3 Months"
         />
       </section>
 
@@ -559,7 +483,9 @@ export default function CscsCourse() {
             Take the definitive step towards coaching elite athletes and elevating your sports performance career.
           </p>
           <a
-            href="#enroll-form"
+            href="https://forms.gle/XhFBUjSRyocVCNFn6"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 rounded-xl bg-white text-black font-extrabold text-sm sm:text-base hover:bg-gray-200 transition-all inline-flex items-center gap-2"
           >
             <span>Register for CSCS Cohort</span>

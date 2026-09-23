@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import PopupBanner from './components/PopupBanner'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import NdaCourse from './pages/NdaCourse'
@@ -17,6 +18,7 @@ function App() {
   return (
     <div className="app-shell">
       <ScrollToTop />
+      <PopupBanner />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

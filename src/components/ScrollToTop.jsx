@@ -6,14 +6,28 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     if (hash) {
-      // Delay slightly to ensure elements are rendered
-      const timer = setTimeout(() => {
+      const scrollToHashElement = () => {
         const element = document.querySelector(hash)
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
+          const navHeight = 90
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+          window.scrollTo({
+            top: Math.max(0, elementPosition - navHeight),
+            behavior: 'smooth'
+          })
+          return true
         }
-      }, 100)
-      return () => clearTimeout(timer)
+        return false
+      }
+
+      // Check immediately and with staggered attempts to accommodate GSAP and dynamic layouts
+      scrollToHashElement()
+      const attempts = [100, 250, 450, 700, 1100]
+      const timers = attempts.map((ms) => setTimeout(scrollToHashElement, ms))
+
+      return () => {
+        timers.forEach(clearTimeout)
+      }
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }

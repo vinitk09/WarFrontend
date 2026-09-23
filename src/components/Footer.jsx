@@ -25,7 +25,7 @@ export default function Footer() {
               <li><Link to="/about">About us</Link></li>
               <li><Link to="/#system">Program</Link></li>
               <li><Link to="/#faculty">Faculty</Link></li>
-              <li><Link to="/#pricing">Contact us</Link></li>
+              <li><a href="https://wa.me/917259346805" target="_blank" rel="noopener noreferrer">Contact us</a></li>
             </ul>
           </div>
 
@@ -38,7 +38,7 @@ export default function Footer() {
               <li><Link to="/cscs-course">CSCS / EAAM Exam Prep</Link></li>
               <li><Link to="/services/sports-performance">Sports Performance</Link></li>
               <li><Link to="/services/professional-education">Professional Education</Link></li>
-              <li><Link to="/services/defence-preparation">Defence Preparation</Link></li>
+              <li><Link to="/services/defence-preparation">SSB Mentors & Defence Preparation</Link></li>
             </ul>
           </div>
 
@@ -49,7 +49,7 @@ export default function Footer() {
               <li><Link to="/#system">Integrated SSB Guidance</Link></li>
               <li><Link to="/#system">Scientific Revision Plan</Link></li>
               <li><Link to="/#system">Performance Analytics</Link></li>
-              <li><Link to="/#pricing">Mock Simulation Tests</Link></li>
+              <li><Link to="/services/defence-preparation">Mock Simulation Tests</Link></li>
             </ul>
           </div>
 

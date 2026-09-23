@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Activity, Dumbbell, Microscope, Gauge, Building2, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react'
-import ConsultationModal from '../components/ConsultationModal'
 
 export default function SportsPerformance() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const serviceOfferings = [
     {
@@ -100,14 +97,15 @@ export default function SportsPerformance() {
                 Led by internationally certified strength coaches and exercise physiologists ensuring every protocol is backed by scientific rigor.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
+            <a
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-white text-black font-bold text-sm hover:bg-gray-100 transition-colors cursor-pointer"
             >
               <span>Book Consultation</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -122,13 +120,14 @@ export default function SportsPerformance() {
             Get in touch with our performance specialists to design your personalized conditioning or testing schedule.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
+            <a
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-black text-white font-bold text-sm rounded-xl hover:bg-gray-800 transition-all shadow-sm cursor-pointer"
             >
               Inquire Now
-            </button>
+            </a>
             <Link
               to="/"
               className="px-6 py-3 bg-gray-100 text-gray-800 font-bold text-sm rounded-xl hover:bg-gray-200 transition-all"
@@ -138,22 +137,6 @@ export default function SportsPerformance() {
           </div>
         </div>
       </section>
-
-      {/* CONSULTATION MODAL FORM */}
-      <ConsultationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Book Sports Performance Consultation"
-        subtitle="Connect with our CSCS-certified coaching staff for personalized conditioning, testing, and movement assessment."
-        defaultService="Strength & Conditioning"
-        serviceOptions={[
-          'Strength & Conditioning',
-          'Sports Science & Performance Testing',
-          'Biomechanics & Movement Analysis',
-          'Athlete Performance Programs',
-          'Sports Academy Consulting',
-        ]}
-      />
     </div>
   )
 }

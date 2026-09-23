@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Award, BookOpen, GraduationCap, Video, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react'
-import ConsultationModal from '../components/ConsultationModal'
 
 export default function ProfessionalEducation() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const educationPrograms = [
     {
@@ -105,14 +102,15 @@ export default function ProfessionalEducation() {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(true)}
-                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gray-100 text-gray-900 font-bold text-sm hover:bg-gray-200 transition-colors cursor-pointer"
+                  <a
+                    href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gray-100 text-gray-900 font-bold text-sm hover:bg-black hover:text-white transition-colors cursor-pointer"
                   >
                     <span>Inquire for Schedule</span>
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </a>
                 )}
               </div>
             )
@@ -139,31 +137,17 @@ export default function ProfessionalEducation() {
             >
               Explore CSCS Course
             </Link>
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
+            <a
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-gray-100 text-gray-800 font-bold text-sm rounded-xl hover:bg-gray-200 transition-all cursor-pointer"
             >
               Contact Advisors
-            </button>
+            </a>
           </div>
         </div>
       </section>
-
-      {/* INQUIRY MODAL */}
-      <ConsultationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Professional Education Inquiry"
-        subtitle="Connect with our academic team for upcoming workshop dates, CSCS preparation batches, and masterclass schedules."
-        defaultService="Workshops & Continuing Education"
-        serviceOptions={[
-          'NSCA CSCS & EAAM Exam Preparation',
-          'Workshops & Continuing Education',
-          'Coach & Instructor Education',
-          'Topic-wise Masterclasses',
-        ]}
-      />
     </div>
   )
 }

@@ -24,7 +24,9 @@ import {
   Compass,
   Layers,
   GraduationCap,
-  Volume2
+  Volume2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 
 // Faculty Assets
@@ -120,28 +122,6 @@ const appFeatures = [
   },
 ]
 
-const steps = [
-  {
-    step: '01',
-    title: 'Visit Platform / App',
-    desc: 'Open the WAARR Digital Learning Portal on your browser or mobile device.',
-  },
-  {
-    step: '02',
-    title: 'Register Profile',
-    desc: 'Use your Email ID or Mobile Number to register your candidate profile.',
-  },
-  {
-    step: '03',
-    title: 'Select CDS 2026 Batch',
-    desc: 'Choose the CDS Comprehensive Batch (IMA, OTA, INA, or AFA stream).',
-  },
-  {
-    step: '04',
-    title: 'Instant Course Activation',
-    desc: 'Complete enrollment securely to instantly unlock live classes, test series, and study materials.',
-  },
-]
 
 const valueAddedFeatures = [
   {
@@ -198,8 +178,8 @@ const faqs = [
     a: 'Yes! WAARR believes that officer preparation is an integrated process. SSB personality development, WAT/TAT exercises, lecturette practice, and GD sessions run concurrently with written exam preparation.',
   },
   {
-    q: 'What is the fee structure for the WAARR CDS Online Course?',
-    a: 'WAARR offers the full 3-Month CDS Comprehensive Course at an accessible fee of just ₹1,000, including live classes, test series, study material, and doubt resolution. Additional discounts are available for webinar attendees.',
+    q: 'What is the admission and enrollment process for the WAARR CDS Online Course?',
+    a: 'You can submit your details using the enrollment form on this page or reach out to our admission counseling desk on WhatsApp or call at +91 7259346805 for batch onboarding and guidance.',
   },
   {
     q: 'Can I access the classes on slow internet connections?',
@@ -230,6 +210,14 @@ export default function CdsCourse() {
     }, 2500)
     return () => clearInterval(timer)
   }, [])
+
+  const nextFaculty = () => {
+    setCurrentFaculty((prev) => (prev + 1) % faculty.length)
+  }
+
+  const prevFaculty = () => {
+    setCurrentFaculty((prev) => (prev - 1 + faculty.length) % faculty.length)
+  }
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -265,11 +253,9 @@ export default function CdsCourse() {
 
           <div className="cds-hero-cta-box" data-aos="fade-up" data-aos-delay="500">
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-hero-primary"
             >
               Enroll in CDS 2026 Batch <ArrowRight size={18} />
@@ -305,8 +291,8 @@ export default function CdsCourse() {
             <div className="qstat-item">
               <GraduationCap size={20} />
               <div>
-                <strong>Affordable Fee</strong>
-                <span>Just ₹1000 Full Course</span>
+                <strong>Admission Status</strong>
+                <span>New Batch Open</span>
               </div>
             </div>
           </div>
@@ -420,37 +406,6 @@ export default function CdsCourse() {
         </div>
       </section>
 
-      {/* HOW TO ENROLL STEPS */}
-      <section className="cds-steps-section">
-        <div className="cds-container">
-          <div className="sec-header-center" data-aos="fade-up">
-            <div className="sec-pill">EASY ONBOARDING</div>
-            <h2>How to Choose & Enroll in WAARR CDS Online Course</h2>
-            <p>Start your preparation with our simple 4-step process.</p>
-          </div>
-
-          <div className="cds-steps-grid">
-            {steps.map((item, index) => (
-              <div
-                className="step-card"
-                key={index}
-                data-aos="fade-up"
-                data-aos-delay={index * 150}
-              >
-                <div className="step-num">{item.step}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="steps-cta-wrap" data-aos="zoom-in">
-            <Link to="/#pricing" className="btn-hero-primary">
-              Register Now & Begin Learning <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* EXPERT FACULTY SLIDER (SAME AS HOMEPAGE) */}
       <section className="faculty-section section" id="faculty" data-aos="fade-up">
@@ -464,6 +419,24 @@ export default function CdsCourse() {
           </div>
 
           <div className="faculty-slider-wrapper">
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-prev-btn"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-next-btn"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={24} />
+            </button>
+
             <div className="faculty-slider">
               {faculty.map((member, index) => (
                 <article
@@ -495,23 +468,41 @@ export default function CdsCourse() {
             </div>
           </div>
 
-          <div className="faculty-dots">
-            {faculty.map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentFaculty ? 'active' : ''}`}
-                onClick={() => setCurrentFaculty(index)}
-              />
-            ))}
+          <div className="faculty-controls-row">
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="faculty-dots">
+              {faculty.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentFaculty ? 'active' : ''}`}
+                  onClick={() => setCurrentFaculty(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
 
           <div className="faculty-cta-wrapper" style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
-              href="#enroll-form"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="https://forms.gle/XhFBUjSRyocVCNFn6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="nav-btn"
               style={{ padding: '15px 40px', fontSize: '1.1rem' }}
             >
@@ -521,33 +512,28 @@ export default function CdsCourse() {
         </div>
       </section>
 
-      {/* FEE & REGISTRATION */}
+      {/* ADMISSION & REGISTRATION */}
       <section className="cds-fee-section" data-aos="fade-up">
         <div className="cds-container">
           <div className="fee-box">
             <div className="fee-left">
-              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>AFFORDABLE EDUCATION</div>
-              <h2>CDS 2026 Online Course Investment</h2>
+              <div className="sec-pill" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}>OFFICER CADRE PREPARATION</div>
+              <h2>CDS 2026 Online Batch Registration</h2>
               <p className="fee-sub">
-                Your defence ambition deserves quality mentorship, not expensive coaching fees. Prepare for CDS written and SSB for 3 months at just <strong>₹1000</strong>.
+                Targeted preparation for IMA, INA, AFA, and OTA covering Elementary Mathematics, English, and General Knowledge with integrated SSB interview guidance.
               </p>
 
               <div className="webinar-deal">
-                <h4>🎯 Special Webinar Discount:</h4>
-                <p>Students who attend our upcoming orientation webinar will be eligible for an additional <strong>15% DISCOUNT</strong>.</p>
-                <p className="deal-contact">For webinar link and batch registration, contact us on WhatsApp: <strong>+91 7259346805</strong></p>
+                <h4>🎯 Academic Counseling Desk:</h4>
+                <p>Have questions regarding eligibility, exam syllabus, or study schedules? Connect directly with our defence advisors.</p>
+                <p className="deal-contact">WhatsApp / Call: <strong>+91 7259346805</strong></p>
               </div>
             </div>
 
             <div className="fee-right">
               <div className="package-card" data-aos="zoom-in" data-aos-delay="200">
-                <div className="package-badge">ALL-INCLUSIVE</div>
-                <div className="pkg-price">
-                  <span className="currency">₹</span>
-                  <span className="amount">1,000</span>
-                  <span className="duration">/ 3 Months</span>
-                </div>
-                <ul className="pkg-features">
+                <div className="package-badge">ALL-INCLUSIVE CURRICULUM</div>
+                <ul className="pkg-features" style={{ marginTop: '1.2rem' }}>
                   <li><CheckCircle2 size={18} /> Complete CDS Syllabus (Math + English + GK)</li>
                   <li><CheckCircle2 size={18} /> Integrated SSB Interview Preparation</li>
                   <li><CheckCircle2 size={18} /> Daily Live Classes & Unlimited Recorded Replays</li>
@@ -556,7 +542,12 @@ export default function CdsCourse() {
                   <li><CheckCircle2 size={18} /> Downloadable PDF Notes & Formula Books</li>
                   <li><CheckCircle2 size={18} /> Final War Room Revision Phase</li>
                 </ul>
-                <a href="#enroll-form" className="btn-pkg-enroll">
+                <a
+                  href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-pkg-enroll"
+                >
                   Enroll in CDS Batch Now <ArrowRight size={18} />
                 </a>
               </div>
@@ -567,7 +558,6 @@ export default function CdsCourse() {
             courseTitle="CDS 2026 Comprehensive Online Course"
             courseCode="CDS"
             batchInfo="CDS 2026 Batch"
-            price="₹1,000 / 3 Months"
           />
         </div>
       </section>
@@ -614,11 +604,9 @@ export default function CdsCourse() {
             </div>
             <div className="cta-banner-buttons">
               <a
-                href="#enroll-form"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('enroll-form')?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-cta-white"
               >
                 Join CDS Batch Today <ArrowRight size={18} />

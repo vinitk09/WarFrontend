@@ -18,9 +18,10 @@ import {
   CheckCircle2, 
   ArrowRight,
   Sparkles,
-  HeartHandshake
+  HeartHandshake,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
-import CourseEnrollmentModal from '../components/CourseEnrollmentModal'
 
 const mentors = [
   {
@@ -115,7 +116,6 @@ const values = [
 
 export default function AboutUs() {
   const [currentFaculty, setCurrentFaculty] = useState(0)
-  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false)
 
   useEffect(() => {
     AOS.init({
@@ -132,6 +132,14 @@ export default function AboutUs() {
     }, 2500)
     return () => clearInterval(timer)
   }, [])
+
+  const nextFaculty = () => {
+    setCurrentFaculty((prev) => (prev + 1) % mentors.length)
+  }
+
+  const prevFaculty = () => {
+    setCurrentFaculty((prev) => (prev - 1 + mentors.length) % mentors.length)
+  }
 
   return (
     <div className="about-page">
@@ -335,6 +343,24 @@ export default function AboutUs() {
           </div>
 
           <div className="faculty-slider-wrapper">
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-prev-btn"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              type="button"
+              className="faculty-nav-btn faculty-next-btn"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={24} />
+            </button>
+
             <div className="faculty-slider">
               {mentors.map((member, index) => (
                 <article
@@ -366,14 +392,34 @@ export default function AboutUs() {
             </div>
           </div>
 
-          <div className="faculty-dots">
-            {mentors.map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentFaculty ? 'active' : ''}`}
-                onClick={() => setCurrentFaculty(index)}
-              />
-            ))}
+          <div className="faculty-controls-row">
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={prevFaculty}
+              aria-label="Previous faculty member"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="faculty-dots">
+              {mentors.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentFaculty ? 'active' : ''}`}
+                  onClick={() => setCurrentFaculty(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="faculty-arrow-pill"
+              onClick={nextFaculty}
+              aria-label="Next faculty member"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
 
           <div className="faculty-cta-wrapper" style={{ textAlign: 'center', marginTop: '40px' }}>
@@ -400,14 +446,15 @@ export default function AboutUs() {
                 Join our comprehensive 3-Month NDA 2026 Batch with daily live classes, 1-on-1 mentorship, and integrated SSB orientation.
               </p>
               <div className="cta-actions">
-                <button
-                  type="button"
-                  onClick={() => setIsEnrollModalOpen(true)}
+                <a
+                  href="https://forms.gle/XhFBUjSRyocVCNFn6"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-cta-primary cursor-pointer inline-flex items-center gap-2"
                 >
                   <span>Enroll in NDA Batch</span>
                   <ArrowRight size={18} />
-                </button>
+                </a>
                 <Link to="/" className="btn-cta-secondary">
                   Back to Homepage
                 </Link>
@@ -416,16 +463,6 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-
-      {/* ENROLLMENT MODAL */}
-      <CourseEnrollmentModal
-        isOpen={isEnrollModalOpen}
-        onClose={() => setIsEnrollModalOpen(false)}
-        courseTitle="NDA Comprehensive Preparation Cohort"
-        courseCode="NDA"
-        batchInfo="3-Month NDA 2026 Batch"
-        price="₹1,000 / 3 Months"
-      />
     </div>
   )
 }
